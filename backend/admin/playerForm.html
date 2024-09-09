@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Player</title>
+</head>
+<body>
+    <h1>Add New Player</h1>
+    <form id="playerForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required><br>
+
+        <label for="ranking">Ranking:</label>
+        <input type="number" id="ranking" name="ranking" required><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br>
+
+        <label for="profile_image_url">Profile Image URL:</label>
+        <input type="text" id="profile_image_url" name="profile_image_url" required><br>
+
+        <fieldset id="grandSlamResults">
+            <legend>Grand Slam Results:</legend>
+            <div class="result">
+                <label for="tournament">Tournament:</label>
+                <input type="text" name="tournament" required><br>
+
+                <label for="result">Result:</label>
+                <input type="text" name="result" required><br>
+
+                <label for="year">Year:</label>
+                <input type="number" name="year" required><br>
+            </div>
+            <button type="button" id="addResult">Add Another Result</button>
+        </fieldset><br>
+
+        <label for="bio">Bio:</label>
+        <textarea id="bio" name="bio"></textarea><br>
+
+        <label for="more_info_link">Wikipedia Link:</label>
+        <input type="text" id="more_info_link" name="more_info_link"><br>
+
+        <button type="submit">Add Player</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('playerForm');
+        const grandSlamResultsContainer = document.getElementById('grandSlamResults');
+        const addResultButton = document.getElementById('addResult');
+
+        function addGrandSlamResult() {
+            const newResult = document.createElement('div');
+            newResult.classList.add('result');
+            newResult.innerHTML = `
+                <label for="tournament">Tournament:</label>
+                <input type="text" name="tournament" required><br>
+    
+                <label for="result">Result:</label>
+                <input type="text" name="result" required><br>
+    
+                <label for="year">Year:</label>
+                <input type="number" name="year" required><br>
+            `;
+            grandSlamResultsContainer.appendChild(newResult);
+        }
+
+        addResultButton.addEventListener('click', addGrandSlamResult);
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const playerData = {
+                name: formData.get('name'),
+                country: formData.get('country'),
+                ranking: Number(formData.get('ranking')),
+                age: Number(formData.get('age')),
+                gender: formData.get('gender'),
+                profile_image_url: formData.get('profile_image_url'),
+                bio: formData.get('bio'),
+                more_link_info: formData.get('more_info_link'),
+                grand_slam_results: []
+            };
+            
+            // Extract grand slam results
+            const results = grandSlamResultsContainer.querySelectorAll('.result');
+            results.forEach(result => {
+                const tournament = result.querySelector('input[name="tournament"]').value;
+                const resultValue = result.querySelector('input[name="result"]').value;
+                const year = Number(result.querySelector('input[name="year"]').value);
+
+                playerData.grand_slam_results.push({
+                    tournament,
+                    result: resultValue,
+                    year
+                });
+            });
+
+            try {
+                const response = await fetch('/api/players', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(playerData)
+                });
+                const data = await response.json();
+                
+                console.log(data);
+                console.log('Player added:', data);
+                
+            } catch (error) {
+                
+                console.log(error);
+                console.error('Error adding player:', error);
+            }
+        });
+    </script>
+</body>
+</html>
+

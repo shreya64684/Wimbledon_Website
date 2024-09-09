@@ -1,0 +1,53 @@
+.banner {
+    min-height: 100vh;
+    /* background-image: url('../images/banner.png'); */
+    display: flex;
+    align-items: center;
+    background: url(../images/wimbledon-banner.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.banner .content {
+    max-width: 60rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 270px;
+}
+
+.banner .content h2 {
+    text-align: center;
+    margin: auto;
+    font-size: 4rem;
+    text-shadow: 6px 0 #4B2078;
+    letter-spacing: 3px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #4B2078;
+    
+}
+
+.banner .content p {
+    text-align: center;
+    margin: auto;
+    font-size: 3.5rem;
+    text-shadow: 5px 0 white;
+    letter-spacing: 3px;
+    font-weight: bold;
+    /* text-transform: uppercase; */
+    color: white;
+    margin-top: 10px;
+    
+}
+
+section {
+    padding: 2rem 7%;
+}
+
+@media (max-width: 991px) {
+    section {
+        padding: 2rem;
+    }
+}

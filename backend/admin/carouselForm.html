@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Carousel Item</title>
+</head>
+<body>
+    <h1>Add New Carousel Item</h1>
+    <form id="carouselForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br>
+
+        <label for="image_url">Image URL:</label>
+        <input type="text" id="image_url" name="image_url" required><br>
+
+        <label for="link">Link:</label>
+        <input type="text" id="link" name="link" required><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br>
+
+        <label for="order">Order:</label>
+        <input type="number" id="order" name="order" value="0" required><br>
+
+        <button type="submit">Add Carousel Item</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('carouselForm');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const carouselData = {
+                title: formData.get('title'),
+                image_url: formData.get('image_url'),
+                link: formData.get('link'),
+                description: formData.get('description'),
+                order: Number(formData.get('order'))
+            };
+
+            try {
+                const response = await fetch('/api/carousel', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(carouselData)
+                });
+                const data = await response.json();
+                console.log('Carousel item added:', data);
+            } catch (error) {
+                console.error('Error adding carousel item:', error);
+            }
+        });
+    </script>
+</body>
+</html>

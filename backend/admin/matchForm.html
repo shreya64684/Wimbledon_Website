@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Match</title>
+</head>
+<body>
+    <h1>Add New Match</h1>
+    <form id="matchForm">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required aria-required="true"><br>
+
+        <label for="tournament_stage">Tournament Stage:</label>
+        <input type="text" id="tournament_stage" name="tournament_stage" required aria-required="true"><br>
+
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required><br>
+
+        <fieldset id="playersContainer">
+            <legend>Players:</legend>
+            <div class="player">
+                <label for="playerName">Name:</label>
+                <input type="text" name="playerName" required><br>
+
+                <label for="playerCountry">Country:</label>
+                <input type="text" name="playerCountry" required><br>
+
+                <label for="isWinner">Is Winner:</label>
+                <select name="isWinner" required>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select><br>
+
+                <label for="score">Score (comma separated):</label>
+                <input type="text" name="score" placeholder="e.g., 6, 4, 7"><br>
+
+                <label for="pointsPerSet">Points Per Set (comma separated):</label>
+                <input type="text" name="pointsPerSet" placeholder="e.g., 15, 40, 30"><br>
+            </div>
+            <button type="button" id="addPlayer">Add Another Player</button>
+        </fieldset><br>
+
+        <label for="duration">Duration:</label>
+        <input type="text" id="duration" name="duration" required><br>
+
+        <label for="match_highlights_link">Match Highlights Link:</label>
+        <input type="text" id="match_highlights_link" name="match_highlights_link"><br>
+
+        <button type="submit">Add Match</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('matchForm');
+        const playersContainer = document.getElementById('playersContainer');
+        const addPlayerButton = document.getElementById('addPlayer');
+
+        // Function to add another player form
+        function addPlayerForm() {
+            const newPlayer = document.createElement('div');
+            newPlayer.classList.add('player');
+            newPlayer.innerHTML = `
+                <label for="playerName">Name:</label>
+                <input type="text" name="playerName" required><br>
+    
+                <label for="playerCountry">Country:</label>
+                <input type="text" name="playerCountry" required><br>
+    
+                <label for="isWinner">Is Winner:</label>
+                <select name="isWinner" required>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select><br>
+    
+                <label for="score">Score (comma separated):</label>
+                <input type="text" name="score" placeholder="e.g., 6, 4, 7"><br>
+    
+                <label for="pointsPerSet">Points Per Set (comma separated):</label>
+                <input type="text" name="pointsPerSet" placeholder="e.g., 15, 40, 30"><br>
+            `;
+            playersContainer.appendChild(newPlayer);
+        }
+
+        addPlayerButton.addEventListener('click', addPlayerForm);
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const matchData = {
+                date: formData.get('date'),
+                tournament_stage: formData.get('tournament_stage'),
+                category: formData.get('category'),
+                duration: formData.get('duration'),
+                match_highlights_link: formData.get('match_highlights_link'),
+                players: []
+            };
+
+            // Extract players' data
+            const players = playersContainer.querySelectorAll('.player');
+            players.forEach(player => {
+                const name = player.querySelector('input[name="playerName"]').value;
+                const country = player.querySelector('input[name="playerCountry"]').value;
+                const is_winner = player.querySelector('select[name="isWinner"]').value === 'true';
+                const score = player.querySelector('input[name="score"]').value.split(',').map(Number);
+                const points_per_set = player.querySelector('input[name="pointsPerSet"]').value.split(',').map(Number);
+
+                matchData.players.push({
+                    name,
+                    country,
+                    is_winner,
+                    score,
+                    points_per_set
+                });
+            });
+
+            try {
+                const response = await fetch('/api/matches', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(matchData)
+                });
+                const data = await response.json();
+                console.log(data);
+                console.log('Match added:', data);
+            } catch (error) {
+                console.log(error);
+                console.error('Error adding match:', error);
+            }
+        });
+    </script>
+</body>
+</html>
