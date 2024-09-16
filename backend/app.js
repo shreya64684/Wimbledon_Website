@@ -16,8 +16,6 @@ app.use('/api/carousel', require('./routes/carouselRoutes'));
 
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-const NewsAPI = require('newsapi');
-
 
 
 // Route to serve the index.html file on the home page
