@@ -1,6 +1,6 @@
 
 body {
-    font-family: 'Poppins', sans-serif;
+   
     background-color: #eef29c;
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@ body {
 
 h1, h2, h3 {
     color: #2c3e50;
-    font-family: 'Poppins', serif;
+  
 }
 /* 
 p {
@@ -41,6 +41,11 @@ h3 {
     font-size: 1.5em;
     margin-bottom: 10px;
 }
+
+#introduction {
+    text-align: center;
+}
+
 
 /* Timeline Styles */
 .timeline-item {

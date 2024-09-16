@@ -16,6 +16,9 @@ app.use('/api/carousel', require('./routes/carouselRoutes'));
 
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+const NewsAPI = require('newsapi');
+
+
 
 // Route to serve the index.html file on the home page
 app.get('/', (req, res) => {
@@ -51,3 +54,5 @@ app.get('/api/carousel', async (req, res) => {
     res.status(500).json({ message: 'Error fetching carousel items', error });
   }
 });
+
+ 

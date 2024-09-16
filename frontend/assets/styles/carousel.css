@@ -48,6 +48,7 @@
   margin: auto;
   height: fit-content;
   background-color: #492078;
+  opacity: 1;
   margin-top: 540px;
 }
 
@@ -56,10 +57,12 @@
   height: fit-content;
   background-color: #492078;
   margin-top: 540px;
+  opacity: 1;
 }
 
 .carousel-control-next {
   transform: translateX(0); 
+  opacity: 1;
 }
 
 .carousel-control-prev-icon,
@@ -68,4 +71,49 @@
   padding: 10px; 
   border-radius: 50%; 
 
+}
+
+.carousel-caption {
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  right: 15px;
+  color: #fff;
+  text-align: left;
+  background-color: transparent;
+  background: rgba(0,0,0,.5);
+  /* border: 1px solid #fff; */
+}
+
+
+.carousel-caption:before {
+  content: '';
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.5);
+  z-index: -1;
+}
+
+/* Adjust caption padding for smaller screens */
+@media (max-width: 768px) {
+  .carousel-caption {
+      font-size: 14px; /* Smaller font size for mobile */
+      padding: 10px;   /* Adjust padding */
+  }
+  
+  .carousel-caption h5 {
+      font-size: 16px; /* Adjust title size */
+  }
+  
+  .carousel-caption p {
+      font-size: 12px; /* Adjust description size */
+  }
+  
+  /* If you have buttons inside the carousel, adjust them as well */
+  .carousel-caption a {
+      font-size: 14px;
+      padding: 8px 12px;
+  }
 }
