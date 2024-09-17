@@ -1,0 +1,95 @@
+ body {
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: #4B2078;
+}
+
+.logo-img {
+    width: 75px;
+    height: 75px;
+    padding: 3px;
+    margin-right: 12px;
+}
+
+.nav-heading {
+    color: #EEF29C;
+    font-size: 34px;
+    
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    border: none;
+    background-color: #4B2078;
+    
+}
+
+.menu {
+    width: 75px;
+}
+
+.menu-icon {
+    fill: #EEF29C;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 20px;
+    text-decoration: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #EEF29C;
+    font-size: 20px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-links a:hover {
+    color: #EEF29C;
+    border-bottom: 3px solid #EEF29C;
+    text-decoration: none;
+    
+    
+}
+
+a.active {
+    border-bottom: 3px solid #EEF29C;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide links by default */
+        flex-direction: column; /* Stack vertically */
+        width: 100%;
+        background-color: #4B2078;
+        position: absolute; /* Position the menu */
+        top: 90px; /* Adjust based on the height of the navbar */
+        left: 0;
+        z-index: 1000; /* Ensure it is on top of other content */
+        padding: 10px 0;
+    }
+
+    .nav-links.active {
+        display: flex; /* Show links when active */
+    }
+
+    .menu-toggle {
+        display: flex; /* Show the menu button */
+    }
+}

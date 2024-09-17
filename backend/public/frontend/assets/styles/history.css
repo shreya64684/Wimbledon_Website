@@ -1,0 +1,116 @@
+
+body {
+   
+    background-color: #eef29c;
+    margin: 0;
+    padding: 0;
+    color: #34495e;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+  
+}
+/* 
+p {
+    color: #34495e;
+} */
+
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #2c3e50;
+    padding-bottom: 5px;
+}
+
+h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#introduction {
+    text-align: center;
+}
+
+
+/* Timeline Styles */
+.timeline-item {
+    margin: 20px 0;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 4px solid #2c3e50;
+    transition: background-color 0.3s ease;
+}
+
+.timeline-item:hover {
+    background-color: #e0e0e0;
+}
+
+/* Champion Card Styles */
+.champion-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.champion-card h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #2c3e50;
+}
+
+.champion-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Gallery Styles */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+.gallery img {
+    margin: 5px;
+    width: 100%;
+    max-width: 200px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Video Embed Styles */
+.video {
+    margin: 20px 0;
+}
+
+.video iframe {
+    width: 100%;
+    height: 315px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

@@ -14,13 +14,13 @@ app.use('/api/players', require('./routes/playerRoutes'));
 app.use('/api/carousel', require('./routes/carouselRoutes'));
 
 
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, "public/frontend")));
 
 
 
 // Route to serve the index.html file on the home page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/pages/index.html'));
+  res.sendFile(path.join(__dirname, 'public/frontend/pages', 'index.html'));
 });
 
 
