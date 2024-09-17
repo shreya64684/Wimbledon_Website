@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, "public/frontend")));
 
 
 // Route to serve the index.html file on the home page
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/frontend/pages', 'index.html'));
 });
 
